@@ -1,7 +1,39 @@
 #include "image_ppm.hpp"
+#include <iostream>
 
 // implement the rest of ImagePPM's functions here
+Pixel ImagePPM::GetPixel(int row, int col) const {
+  return pixels_[row][col];
+}
+int ImagePPM::GetMaxColorValue() const {
+  return max_color_value_;
+}
+std::ostream& operator<<(std::ostream& os, const ImagePPM& image) {
+  os << "P3" << '\n';
+  os << image.GetWidth() << " " << image.GetHeight() << '\n';
+  os << image.GetMaxColorValue() << '\n';
+  for (int row = 0; row < image.GetHeight(); row++) {
+    for (int col = 0; col < image.GetWidth(); col++) {
+      os << image.GetPixel(row,col).GetRed() << '\n';
+      os << image.GetPixel(row,col).GetGreen() << '\n';
+      os << image.GetPixel(row,col).GetBlue() << '\n';
+    }
+  }
 
+  return os;
+}
+void ImagePPM::Overwrite(Pixel** input, bool vert) {
+  for (int i = 0; i < height_; i++) {
+    delete[] pixels_[i];
+  }
+  if (vert) {
+    width_--;
+  } else {
+    height_--;
+  }
+  delete[] pixels_;
+  pixels_ = input;
+}
 // given functions below, DO NOT MODIFY
 
 ImagePPM::ImagePPM(const std::string& path) {

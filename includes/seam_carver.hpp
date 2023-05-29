@@ -114,12 +114,15 @@ public:
 
 private:
   ImagePPM image_;
+  static const int kMax = 2147483647;
   int height_ = 0;
   int width_ = 0;
 
   /**
    * Add any helper methods you may need
    */
+  int* VertHelper(int start, int** values) const;
+  int* HorizHelper(int start, int** values) const;
 };
 
 #endif

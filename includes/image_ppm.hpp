@@ -63,7 +63,7 @@ public:
   /**
    * Add any helper methods you may need
    */
-
+  void Overwrite(Pixel** input, bool vert);
 private:
   int height_ = 0;
   int width_ = 0;
